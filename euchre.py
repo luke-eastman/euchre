@@ -3,8 +3,18 @@ import random
 
 def play_game():
     hands, kitty = deal()
-    print(hands)
-    print(kitty)
+
+    print(f'your hand: {hands[0]}')
+    print(f'top card of kitty: {kitty[0]}')
+
+    response = input('would you like to call trump?(y/n)')
+    print(response)
+    if response == 'y':
+        trump = kitty[0][0]
+    else:
+        trump = ''
+
+    print(trump)
 
 
 def deal():
@@ -29,4 +39,3 @@ def deal():
     return hands, remaining_deck
 
 
-play_game()
