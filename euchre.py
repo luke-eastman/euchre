@@ -3,7 +3,7 @@ import random
 
 def play_game():
     hands, kitty = deal()
-
+    print(kitty)
     print(f'your hand: {hands[0]}')
     print(f'top card of kitty: {kitty[0]}')
 
@@ -28,7 +28,7 @@ def deal():
         if player > 3:
             player = 0
             hand_size += 1
-
+    random.shuffle(remaining_deck)
     return hands, remaining_deck
 
 
@@ -51,6 +51,7 @@ def pick_trump(top_card, hands):
     else:
         trump = ''
     for i in range(1, 4):
+        print(f'player: {i}')
         print(hands[i])
         print(player_wants_trump(i))
     print(trump)
