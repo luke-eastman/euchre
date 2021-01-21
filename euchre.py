@@ -46,13 +46,16 @@ def pick_trump(top_card, hands):
 
     response = input('would you like to call trump?(y/n)')
     print(response)
+    trump = ''
     if response == 'y':
         trump = top_card[0]
     else:
-        trump = ''
-    for i in range(1, 4):
-        print(f'player: {i}')
-        print(hands[i])
-        print(player_wants_trump(i))
+        for i in range(1, 4):
+            print(f'player: {i}')
+            print(hands[i])
+            print(player_wants_trump(i))
+            if player_wants_trump(i):
+                trump = top_card[0]
+                break
     print(trump)
 
