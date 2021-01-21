@@ -7,14 +7,7 @@ def play_game():
     print(f'your hand: {hands[0]}')
     print(f'top card of kitty: {kitty[0]}')
 
-    response = input('would you like to call trump?(y/n)')
-    print(response)
-    if response == 'y':
-        trump = kitty[0][0]
-    else:
-        trump = ''
-
-    print(trump)
+    pick_trump(kitty[0], hands)
 
 
 def deal():
@@ -38,4 +31,27 @@ def deal():
 
     return hands, remaining_deck
 
+
+def pick_trump(top_card, hands):
+    def player_wants_trump(player):
+        trump_count = 0
+        for card in hands[player]:
+            if card[0] == top_card[0]:
+                trump_count += 1
+
+        if trump_count < 2:
+            return False
+        else:
+            return True
+
+    response = input('would you like to call trump?(y/n)')
+    print(response)
+    if response == 'y':
+        trump = top_card[0]
+    else:
+        trump = ''
+    for i in range(1, 4):
+        print(hands[i])
+        print(player_wants_trump(i))
+    print(trump)
 
