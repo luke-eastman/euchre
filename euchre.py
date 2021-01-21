@@ -2,12 +2,20 @@ import random
 
 
 def play_game():
-    hands, kitty = deal()
-    print(kitty)
-    print(f'your hand: {hands[0]}')
-    print(f'top card of kitty: {kitty[0]}')
+    scores = [0, 0]
 
-    pick_trump(kitty[0], hands)
+    def play_hand():
+        hands, kitty = deal()
+        print(kitty)
+        print(f'your hand: {hands[0]}')
+        print(f'top card of kitty: {kitty[0]}')
+
+        trump = pick_trump(kitty[0], hands)
+        print(trump)
+        scores[0] += 1
+
+    while scores[0] < 10 and scores[1] < 10:
+        play_hand()
 
 
 def deal():
@@ -45,8 +53,7 @@ def pick_trump(top_card, hands):
             return True
 
     response = input('would you like to call trump?(y/n)')
-    print(response)
-    trump = ''
+    trump = 'D'
     if response == 'y':
         trump = top_card[0]
     else:
@@ -57,5 +64,6 @@ def pick_trump(top_card, hands):
             if player_wants_trump(i):
                 trump = top_card[0]
                 break
-    print(trump)
+    return trump
+
 
