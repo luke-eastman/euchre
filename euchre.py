@@ -5,14 +5,32 @@ def play_game():
     scores = [0, 0]
 
     def play_hand():
+        table = []
         hands, kitty = deal()
         print(kitty)
         print(f'your hand: {hands[0]}')
         print(f'top card of kitty: {kitty[0]}')
 
         trump = pick_trump(kitty[0], hands)
-        print(trump)
-        scores[0] += 1
+        print(f"trump is {trump}")
+
+        def play_round():
+            def play_card(player):
+                if player == 0:
+                    card_played = users_play_choice(hands[0], '', table)
+                    table.append(card_played)
+
+                else:
+                    print(f"computer player {player}'s hand: {hands[player]}")
+
+            for i in range(4):
+                play_card(i)
+
+        for play in range(5):
+            print(f'play: {play}')
+            play_round()
+
+        scores[0] += 3
 
     while scores[0] < 10 and scores[1] < 10:
         play_hand()
@@ -67,3 +85,11 @@ def pick_trump(top_card, hands):
     return trump
 
 
+def users_play_choice(hand, lead_suit, current_plays):
+    print(f'your hand: {hand}, {lead_suit} was lead')
+    print(f'the table currently looks like this: {current_plays}')
+    card = int(input('which card would you like to play?'))
+    if hand[card][0] == lead_suit or lead_suit == '':
+        card_to_play = hand[card]
+        del hand[card]
+        return card_to_play
